@@ -46,4 +46,6 @@ type KubernetesConfig struct {
 	NetworkPlugin     string
 	FeatureGates      string
 	ExtraOptions      util.ExtraOptionSlice
+	// KubeletOnly deploys just a Kubelet. This is always enabled for self-hosting.
+	KubeletOnly bool
 }

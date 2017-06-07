@@ -66,6 +66,11 @@ fi
 `
 
 func GetStartCommand(kubernetesConfig KubernetesConfig) (string, error) {
+	// do not deploy localkube if self-hosting or using kubelet only
+	if kubernetesConfig.KubeletOnly {
+		return StartKubeletCmd(kubernetesConfig)
+	}
+
 	localkubeStartCommand, err := GenLocalkubeStartCmd(kubernetesConfig)
 	if err != nil {
 		return "", err

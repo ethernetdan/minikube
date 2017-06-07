@@ -61,6 +61,7 @@ const (
 	apiServerName         = "apiserver-name"
 	dnsDomain             = "dns-domain"
 	mountString           = "mount-string"
+	kubeletOnly           = "kubelet"
 )
 
 var (
@@ -148,6 +149,7 @@ func runStart(cmd *cobra.Command, args []string) {
 		ContainerRuntime:  viper.GetString(containerRuntime),
 		NetworkPlugin:     viper.GetString(networkPlugin),
 		ExtraOptions:      extraOptions,
+		KubeletOnly:       viper.GetBool(kubeletOnly),
 	}
 
 	fmt.Println("Moving files into cluster...")
@@ -311,6 +313,7 @@ func init() {
 		`A set of key=value pairs that describe configuration that may be passed to different components.
 		The key should be '.' separated, and the first part before the dot is the component to apply the configuration to.
 		Valid components are: kubelet, apiserver, controller-manager, etcd, proxy, scheduler.`)
+	startCmd.Flags().Bool(kubeletOnly, false, "Only deploy a kubelet")
 	viper.BindPFlags(startCmd.Flags())
 	RootCmd.AddCommand(startCmd)
 }

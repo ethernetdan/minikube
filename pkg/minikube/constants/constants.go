@@ -123,6 +123,7 @@ const (
 )
 
 const (
+	KubeletServicePath   = "/usr/lib/systemd/system/kubelet.service"
 	LocalkubeServicePath = "/usr/lib/systemd/system/localkube.service"
 	LocalkubeRunning     = "active"
 	LocalkubeStopped     = "inactive"
